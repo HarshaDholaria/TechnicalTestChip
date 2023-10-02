@@ -1,0 +1,27 @@
+---
+  name: pull-request-tests
+
+  on:
+    pull_request:
+      branches:
+        - development
+        - master
+
+  jobs:
+    tests:
+      name: Trigger API Tests
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+        - name: ${{ env.project_name }} Unit Tests
+          working-directory: ./${{ env.project_prefix }}.Tests
+          run: dotnet test
+
+        - name: ${{ env.project_name }} Functional Tests
+          working-directory: ./${{ env.project_prefix }}.FunctionalTests
+          run: |
+              sudo systemctl start mysql.service
+              sudo /etc/init.d/mysql start
+              mysql --user=$DBUser --password=$DBPassword
+              echo "Env is $aspnetcore_environment"
+              dotnet test

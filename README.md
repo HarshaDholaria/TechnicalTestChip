@@ -8,7 +8,7 @@ I have implemented the task in Java in a maven project using [rest-assured](http
 ### LIBRARIES USED
 
 1. [rest-assured](https://rest-assured.io/)
-2. Serenity Cucumber BDD 
+2. Cucumber BDD 
 3. JUnit 4
 4. JsonPath and XmlPath
 
